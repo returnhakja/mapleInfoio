@@ -15,12 +15,17 @@ export const useOcidAPI = () => {
   };
 
   const useGetUserConfig = (param: Parameters<typeof getUserConfig>[0]) => {
+    console.log(param);
     return useQuery({
       queryKey: ["userConfig", param],
       staleTime: 1000 * 60,
       queryFn: () => getUserConfig({ ...param }),
-      refetchOnWindowFocus: false,
+      // refetchOnWindowFocus: false,
+      onError: () => {
+        console.log("error");
+      },
       enabled: Boolean(!param),
+      // enabled: true,
     });
   };
   return {

@@ -1,10 +1,18 @@
 import { useEffect, useState } from "react";
 import { useOcidAPI } from "../../states/server/useOcidAPI";
+import { useInfo } from "../../hooks/useInfo.hooks";
+import { TextInput } from "../common/TextInput";
+import { useQueryClient } from "@tanstack/react-query";
+import { useDispatch } from "react-redux";
+import { queryClientActions } from "../../states/client/queryClient.ts/queryClient";
 
 export const apiKey =
   "live_d7d02164e7756253a44ed95738dc01d1d4d3e5615523431441bfe2a943898303c8e2a5fc4855ba38eb15d28219f85579";
 export const MainInfoPage = () => {
+  const queryClient = useQueryClient();
   const [nickName, setNickName] = useState<string>("");
+  const app = useInfo({ nickName });
+  console.log(app.ocidData);
   // const [chData, setChData] = useState<any>();
   const { useGetUserOcid, useGetUserConfig } = useOcidAPI();
   const { data: ocidData, refetch } = useGetUserOcid({ nickName });
@@ -12,39 +20,38 @@ export const MainInfoPage = () => {
   const { data: chData, refetch: configRef } = useGetUserConfig({
     ocid: ocidData?.ocid,
   });
-
-  console.log(nickName);
-  const currentExp = 8000749733207;
-  const totalExp = 16657228589191;
-
-  const percentage = ((currentExp / totalExp) * 100).toFixed(3);
-
-  console.log(percentage);
-  console.log(ocidData);
+  const dispatch = useDispatch();
   useEffect(() => {
-    if (ocidData && ocidData.ocid) {
-      configRef();
-    }
-  }, [configRef, ocidData]);
+    dispatch(queryClientActions.setQueryClient(queryClient));
+  }, [dispatch, queryClient]);
+  // console.log(nickName);
+  console.log(ocidData);
+  // useEffect(() => {
+  //   if (ocidData && ocidData.ocid) {
+  //     configRef();
+  //   }
+  // }, [configRef, ocidData]);
 
   const test = () => {
     refetch();
   };
+  // if (app.isLoading) return null;
   return (
     <div>
-      <input
-        onChange={(e) => {
+      <TextInput
+        onChange={(e: any) => {
           setNickName(e.target.value);
         }}
       />
       <button onClick={test}> 조회</button>
       <br />
-      <img src={chData?.character_image} />
-      <p>캐릭터 명 : {chData?.character_name}</p>
-      <p>레벨 : {chData?.character_level}</p>
-      <p>길드 : {chData?.character_guild_name}</p>
-      <p>직업 : {chData?.character_class}</p>
-      <p>월드 : {chData?.world_name}</p>
+      <img src={ocidData?.character_image} />
+      <p>캐릭터 명 : {ocidData?.character_name}</p>
+      <p>레벨 : {ocidData?.character_level}</p>
+      <p>경험치 : {ocidData?.character_exp_rate}%</p>
+      <p>길드 : {ocidData?.character_guild_name}</p>
+      <p>직업 : {ocidData?.character_class}</p>
+      <p>월드 : {ocidData?.world_name}</p>
     </div>
   );
 };
