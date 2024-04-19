@@ -1,11 +1,11 @@
 declare module User {
   type Ocid = {
-    character_name?: string;
-    nickName?: string;
-    datas?: string;
+    character_name?: any;
+    nickName?: any;
+    datas?: any;
   };
   type Config = {
-    ocid?: string;
-    datas?: string;
+    ocid?: string | any;
+    datas?: any;
   };
 }
