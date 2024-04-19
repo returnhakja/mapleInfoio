@@ -1,0 +1,9 @@
+ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 680px;
+}
+li{
+    padding: 20px;
+}

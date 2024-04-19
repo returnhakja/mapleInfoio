@@ -1,0 +1,48 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px 50px;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0px 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.content h2 {
+  font-size: 21px;
+  font-weight: 800;
+  padding: 10px 0;
+}
+
+/* 컨텐츠1 */
+.characterSearch {
+  display: flex;
+  justify-content: space-between;
+  width: 280px;
+}
+
+.characterInformation {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.characterInformation article {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.characterImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  background-color: rgb(62, 186, 243, 0.8);
+  border-radius: 50px;
+  overflow: hidden;
+}
+.characterImage img {
+}
