@@ -1,77 +1,88 @@
-import { useEffect, useState } from "react";
-import { useOcidAPI } from "../../states/server/useOcidAPI";
 import { useInfo } from "../../hooks/useInfo.hooks";
-import { useQueryClient } from "@tanstack/react-query";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../states/client";
-import { setOcid } from "../../states/client/userOcid.ts/ocid";
-import { queryClientActions } from "../../states/client/queryClient.ts/queryClient";
 import style from "./container.module.css";
 import basicCharacter from "../../assets/basicCharacter.png";
-import { TextInput } from "../common/TextInput";
-import Gnb from "../header/Gnb";
+import { Gnb } from "../header/Gnb";
 
-interface ContentProps {
-  heading?: string;
-}
-
-export const Content = ({ heading }: ContentProps) => {
-  const queryClient = useQueryClient();
+export const Content = () => {
   const ocId = useSelector((state: RootState) => state.ocId);
-  const [nickName, setNickName] = useState<string>(ocId);
-  const app = useInfo({ nickName });
-  console.log(app.ocidData);
 
-  const { useGetUserOcid } = useOcidAPI();
-  const { data: ocidData, refetch } = useGetUserOcid({ nickName });
-  const characterImage = ocId ? ocId.character_image : basicCharacter;
-  console.log(ocidData);
+  const app = useInfo({ nickName: ocId });
 
-  console.log(ocId?.character_class);
+  const characterImage = ocId ? app.userInfo?.character_image : basicCharacter;
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(queryClientActions.setQueryClient(queryClient));
-    if (ocidData) {
-      dispatch(setOcid(ocidData));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ocidData]);
-
-  const reFetchData = () => {
-    refetch();
-  };
+  if (app.InfoLoading) return <></>;
   return (
     <>
       <header className={style.header}>
         <Gnb />
       </header>
       <div className={style.content}>
-        <h2>{heading}</h2>
-        <div className={style.characterSearch}>
-          <TextInput
-            onChange={(e: any) => {
-              setNickName(e.target.value);
-            }}
-          />
-          <button onClick={reFetchData}>캐릭터 조회</button>
-        </div>
-        <div className={style.characterInformation}>
+        <h2>InfoMation</h2>
+        {/* <div className={style.characterInformation}>
           <article>
-            <p>캐릭터 명 : {ocId?.character_name}</p>
-            <p>레벨 : {ocId?.character_level}</p>
-            <p>경험치 : {ocId?.character_exp_rate}%</p>
-            <p>길드 : {ocId?.character_guild_name}</p>
-            <p>직업 : {ocId?.character_class}</p>
-            <p>월드 : {ocId?.world_name}</p>
+            <p>캐릭터 명 : {app.userInfo?.character_name}</p>
+            <p>레벨 : {app.userInfo?.character_level}</p>
+            <p>경험치 : {app.userInfo?.character_exp_rate}%</p>
+            <p>길드 : {app.userInfo?.character_guild_name}</p>
+            <p>직업 : {app.userInfo?.character_class}</p>
+            <p>월드 : {app.userInfo?.world_name}</p>
           </article>
           <div className={style.characterImage}>
             <img
               src={characterImage}
-              alt={ocId ? ocId.character_name : "기본캐릭터"}
+              alt={app.userInfo ? app.userInfo.character_name : "기본캐릭터"}
             />
           </div>
+        </div> */}
+        <div className={style.Info}>
+          <p className={style.HeaderText}>CHARACTER INFO</p>
+
+          <div className={style.userConfig}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <div style={{ display: "grid", alignContent: "start" }}>
+                <div className={style.ChInfo} style={{ order: -1 }}>
+                  {app.userInfo?.character_class}
+                </div>
+                <div className={style.ChInfo}>유니온</div>
+                <div className={style.ChInfo} style={{ order: 1 }}>
+                  무릉도장
+                </div>
+                <div className={style.ChInfo} style={{ order: 2 }}>
+                  인기도
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  justifyItems: "center",
+                }}
+              >
+                <div className={style.ChLev}>
+                  {app.userInfo?.character_level}
+                </div>
+                <img
+                  style={{ alignItems: "center", justifyContent: "center" }}
+                  src={characterImage}
+                  alt={
+                    app.userInfo ? app.userInfo.character_name : "기본캐릭터"
+                  }
+                />
+                <p className={style.ChInfo}>{app.userInfo?.character_name}</p>
+              </div>
+              <div className={style.ChInfo}>
+                <p>길드 {app.userInfo?.character_guild_name}</p>
+              </div>
+            </div>
+          </div>
+          <div></div>
         </div>
       </div>
     </>

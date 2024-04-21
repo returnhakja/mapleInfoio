@@ -10,6 +10,7 @@
 }
 .content h2 {
   font-size: 21px;
+  text-align: center;
   font-weight: 800;
   padding: 10px 0;
 }
@@ -25,6 +26,8 @@
   display: flex;
   justify-content: space-between;
   gap: 50px;
+  /* height: 1000px;s */
+  /* width: 500px; */
 }
 
 .characterInformation article {
@@ -44,5 +47,62 @@
   border-radius: 50px;
   overflow: hidden;
 }
-.characterImage img {
+
+.Info {
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 528px;
+  background-color: #333333;
+}
+
+.HeaderText {
+  color: yellow;
+  margin-top: 5px;
+  margin-left: 10px;
+  font-weight: bold;
+}
+.userConfig {
+  background-color: #fff;
+  margin: 10px 10px 10px 10px;
+  height: 170px;
+  border-radius: 5px;
+
+  /* display: flex; */
+}
+
+.ChInfo {
+  border-radius: 20px;
+  background-color: aqua;
+  width: 150px;
+  height: 20px;
+  text-align: center;
+  margin: 10px 10px 0px 5px;
+  font-weight: normal;
+  /* text-align: justify;
+  text-justify: inter-word; */
+}
+.ChInfo p {
+  display: inline; /* p 요소를 인라인 요소로 설정하여 텍스트가 끝까지 붙도록 함 */
+  width: 100%; /* 부모 요소 너비에 맞게 설정 */
+}
+.test {
+  display: grid;
+}
+.item {
+  align-self: self-end;
+}
+
+.ChLev {
+  border-radius: 0px 0px 10px 10px;
+  margin-bottom: 20px;
+  background-color: aqua;
+  width: 100px;
+  height: 20px;
+  text-align: center;
+  font-weight: normal;
+  &::before {
+    content: "LV. ";
+  }
 }

@@ -1,5 +1,19 @@
-import test from "../../assets/logo.png";
-export default function Gnb() {
+import { useState } from "react";
+import Logo from "../../assets/logo.png";
+import { useInfo } from "../../hooks/useInfo.hooks";
+import { Button } from "../common/Button";
+import { TextInput } from "../common/TextInput";
+import style from "../infoPage/page.module.css";
+import { useDispatch } from "react-redux";
+import { setOcid } from "../../states/client/userOcid.ts/ocid";
+export const Gnb = () => {
+  const [nickName, setNickName] = useState("");
+  const app = useInfo({ nickName });
+  const dispatch = useDispatch();
+  const reFetchData = () => {
+    app.refetch();
+    dispatch(setOcid(nickName));
+  };
   return (
     <div
       style={{
@@ -13,14 +27,22 @@ export default function Gnb() {
       }}
     >
       <img
-        src={test}
-        alt="test"
+        src={Logo}
+        alt="Logo"
         onClick={() => (window.location.href = "/")}
         style={{
           width: "100px",
           height: "100px",
         }}
       />
+      <div className={style.inputCon}>
+        <TextInput
+          className={style.inPut}
+          placeholder="닉네임을 입력하세요."
+          onChange={(e: any) => setNickName(e.target.value)}
+        />
+        <Button text="조회" className={style.button} onClick={reFetchData} />
+      </div>
     </div>
   );
-}
+};

@@ -1,9 +1,7 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getUserConfig, getUserOcid } from "../../api/userConfig";
 
 export const useOcidAPI = () => {
-  const queryClient = useQueryClient();
-
   const useGetUserOcid = (param: Parameters<typeof getUserOcid>[0]) => {
     return useQuery({
       queryKey: ["userOcid", param],
@@ -15,17 +13,14 @@ export const useOcidAPI = () => {
   };
 
   const useGetUserConfig = (param: Parameters<typeof getUserConfig>[0]) => {
-    console.log(param);
     return useQuery({
-      queryKey: ["userConfig", param],
+      queryKey: ["userConfig", param.ocid],
       staleTime: 1000 * 60,
-      queryFn: () => getUserConfig({ ...param }),
-      // refetchOnWindowFocus: false,
+      queryFn: () => getUserConfig({ ...param.ocid }),
       onError: () => {
         console.log("error");
       },
       enabled: Boolean(!param),
-      // enabled: true,
     });
   };
   return {
