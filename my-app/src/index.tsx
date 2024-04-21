@@ -7,10 +7,12 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "react-redux";
 import { useLayoutEffect, useState } from "react";
-import { MainInfoPage } from "./components/infoPage/MainInfoPage";
+import { MainPage } from "./components/infoPage/MainPage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Content } from "./components/container/Content";
+
 const storeModule = () => import("./states/client/store");
 const root = ReactDOM.createRoot(document.getElementById("root")!);
-
 const queryClient = new QueryClient();
 const HostRouter = () => {
   const [store, setStore] = useState<any>(null);
@@ -25,8 +27,12 @@ const HostRouter = () => {
     store && (
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
-          <MainInfoPage />
-          {/* <App /> */}
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/info" element={<Content />} />
+            </Routes>
+          </BrowserRouter>
         </Provider>
         <ReactQueryDevtools initialIsOpen={true} />
       </QueryClientProvider>

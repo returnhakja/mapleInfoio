@@ -1,15 +1,17 @@
 import { useOcidAPI } from "../states/server/useOcidAPI";
+import { useDispatch } from "react-redux";
 
 export const useInfo = ({ nickName }: any) => {
   const { useGetUserOcid, useGetUserConfig } = useOcidAPI();
   const { isLoading, data: ocidData, refetch } = useGetUserOcid({ nickName });
-  const reFetchData = () => {
-    refetch();
-  };
+
+  const dispatch = useDispatch();
+
   console.log(ocidData);
   return {
     isLoading,
     ocidData,
-    reFetchData,
+    refetch,
+    // reFetchData,
   };
 };

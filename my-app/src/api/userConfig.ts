@@ -9,6 +9,7 @@ export const getUserOcid = async (param: User.Ocid) => {
     const configData = await getUserConfig({ ocid: data.ocid });
     return configData;
   }
+  return data;
   console.log(data);
   // return data;
 };
