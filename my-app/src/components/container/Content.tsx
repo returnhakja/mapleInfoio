@@ -1,9 +1,13 @@
+/** @jsxImportSource @emotion/react */
+
 import { useInfo } from "../../hooks/useInfo.hooks";
 import { useSelector } from "react-redux";
 import { RootState } from "../../states/client";
 import style from "./container.module.css";
 import basicCharacter from "../../assets/basicCharacter.png";
 import { Gnb } from "../header/Gnb";
+import * as Styles from "./Content.styles";
+import { Button } from "../common/Button";
 
 export const Content = () => {
   const ocId = useSelector((state: RootState) => state.ocId);
@@ -20,22 +24,7 @@ export const Content = () => {
       </header>
       <div className={style.content}>
         <h2>InfoMation</h2>
-        {/* <div className={style.characterInformation}>
-          <article>
-            <p>캐릭터 명 : {app.userInfo?.character_name}</p>
-            <p>레벨 : {app.userInfo?.character_level}</p>
-            <p>경험치 : {app.userInfo?.character_exp_rate}%</p>
-            <p>길드 : {app.userInfo?.character_guild_name}</p>
-            <p>직업 : {app.userInfo?.character_class}</p>
-            <p>월드 : {app.userInfo?.world_name}</p>
-          </article>
-          <div className={style.characterImage}>
-            <img
-              src={characterImage}
-              alt={app.userInfo ? app.userInfo.character_name : "기본캐릭터"}
-            />
-          </div>
-        </div> */}
+
         <div className={style.Info}>
           <p className={style.HeaderText}>CHARACTER INFO</p>
 
@@ -48,15 +37,22 @@ export const Content = () => {
               }}
             >
               <div style={{ display: "grid", alignContent: "start" }}>
-                <div className={style.ChInfo} style={{ order: -1 }}>
+                <div
+                  css={Styles.ChInfo({ Color: "#9aa2ab" })}
+                  style={{ textAlign: "center", fontSize: "14px" }}
+                >
                   {app.userInfo?.character_class}
                 </div>
-                <div className={style.ChInfo}>유니온</div>
-                <div className={style.ChInfo} style={{ order: 1 }}>
-                  무릉도장
+                <div>&nbsp;</div>
+                <div>&nbsp;</div>
+                <div css={Styles.ChInfo({ Color: "#c9ced0" })}>
+                  <span>유니온</span>
                 </div>
-                <div className={style.ChInfo} style={{ order: 2 }}>
-                  인기도
+                <div css={Styles.ChInfo({ Color: "#c9ced0" })}>
+                  <span>무릉도장</span>
+                </div>
+                <div css={Styles.ChInfo({ Color: "#c9ced0" })}>
+                  <span>인기도</span>
                 </div>
               </div>
               <div
@@ -65,9 +61,7 @@ export const Content = () => {
                   justifyItems: "center",
                 }}
               >
-                <div className={style.ChLev}>
-                  {app.userInfo?.character_level}
-                </div>
+                <div css={Styles.ChLev}>{app.userInfo?.character_level}</div>
                 <img
                   style={{ alignItems: "center", justifyContent: "center" }}
                   src={characterImage}
@@ -75,14 +69,36 @@ export const Content = () => {
                     app.userInfo ? app.userInfo.character_name : "기본캐릭터"
                   }
                 />
-                <p className={style.ChInfo}>{app.userInfo?.character_name}</p>
+                <p
+                  css={Styles.ChInfo({ Color: "#3dbfd0" })}
+                  style={{ textAlign: "center" }}
+                >
+                  {app.userInfo?.character_name}
+                </p>
               </div>
-              <div className={style.ChInfo}>
-                <p>길드 {app.userInfo?.character_guild_name}</p>
+
+              <div style={{ display: "grid", alignContent: "start" }}>
+                <div>&nbsp;</div>
+                <div>&nbsp;</div>
+                <div>&nbsp;</div>
+                <div>&nbsp;</div>
+                <div>&nbsp;</div>
+                <div>&nbsp;</div>
+                <div css={Styles.ChInfo({ Color: "#c9ced0" })}>
+                  <span>길드</span> {app.userInfo?.character_guild_name}
+                </div>
               </div>
             </div>
           </div>
-          <div></div>
+          <Button text="Detail" css={Styles.Detail} />
+        </div>
+        <div css={Styles.DetailContainer}>
+          <div css={Styles.Stat}>STAT</div>
+          <div css={Styles.Power}>
+            <span css={Styles.PowerLabel}>전투력</span>
+            <span css={Styles.PowerValue}>2억4049 6048</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          </div>
         </div>
       </div>
     </>

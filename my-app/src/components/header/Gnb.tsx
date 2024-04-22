@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+
 import { useState } from "react";
 import Logo from "../../assets/logo.png";
 import { useInfo } from "../../hooks/useInfo.hooks";
@@ -6,6 +8,7 @@ import { TextInput } from "../common/TextInput";
 import style from "../infoPage/page.module.css";
 import { useDispatch } from "react-redux";
 import { setOcid } from "../../states/client/userOcid.ts/ocid";
+import * as Styles from "./Header.styles";
 export const Gnb = () => {
   const [nickName, setNickName] = useState("");
   const app = useInfo({ nickName });
@@ -15,25 +18,12 @@ export const Gnb = () => {
     dispatch(setOcid(nickName));
   };
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#FFF",
-        boxShadow: "0px 3px 3px 0px rgba(0, 0, 0, 0.08)",
-      }}
-    >
+    <div css={Styles.HeaderCon}>
       <img
+        css={Styles.Logo}
         src={Logo}
         alt="Logo"
         onClick={() => (window.location.href = "/")}
-        style={{
-          width: "100px",
-          height: "100px",
-        }}
       />
       <div className={style.inputCon}>
         <TextInput

@@ -6,10 +6,12 @@ import reportWebVitals from "./reportWebVitals";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "react-redux";
+import { Global } from "@emotion/react";
 import { useLayoutEffect, useState } from "react";
 import { MainPage } from "./components/infoPage/MainPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Content } from "./components/container/Content";
+import { GlobalStyle } from "./styles/globalStyles";
 
 const storeModule = () => import("./states/client/store");
 const root = ReactDOM.createRoot(document.getElementById("root")!);
@@ -28,6 +30,7 @@ const HostRouter = () => {
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
           <BrowserRouter>
+            <Global styles={GlobalStyle} />
             <Routes>
               <Route path="/" element={<MainPage />} />
               <Route path="/info" element={<Content />} />

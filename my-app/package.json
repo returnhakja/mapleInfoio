@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@tanstack/react-query": "^4.29.15",
+    "@emotion/react": "^11.11.1",
     "@tanstack/react-query-devtools": "^4.33.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -50,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@emotion/babel-preset-css-prop": "^11.11.0",
     "@types/axios": "^0.14.0",
     "@types/react-redux": "^7.1.25",
     "@types/react-router-dom": "^5.3.3"
