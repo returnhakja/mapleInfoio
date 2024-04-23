@@ -60,13 +60,8 @@
   color: #1e1e1e;
 }
 
-.inputCon {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 25px;
-}
-
 .searchRanking {
+  margin-top: 25px;
   width: 368px;
   height: 240px;
   background-color: #fff;
