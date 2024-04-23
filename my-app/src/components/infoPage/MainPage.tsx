@@ -21,21 +21,40 @@ export const MainPage = () => {
     dispatch(setOcid(nickName));
     navigate("/info");
   };
+
+  const rankers = [
+    { order: 1, rankerNickName: "거프" },
+    { order: 2, rankerNickName: "루피" },
+    { order: 3, rankerNickName: "상디" },
+    { order: 4, rankerNickName: "조로" },
+    { order: 5, rankerNickName: "거프임" },
+    { order: 6, rankerNickName: "피그마" },
+    { order: 7, rankerNickName: "하이요" },
+    { order: 8, rankerNickName: "조로" },
+    { order: 9, rankerNickName: "뚱땡이" },
+    { order: 10, rankerNickName: "루피" },
+    { order: 11, rankerNickName: "상디" },
+    { order: 12, rankerNickName: "조로" },
+  ];
   return (
     <>
       <header className={style.header}>
         <Gnb />
       </header>
-      <div className={style.logoText}>
-        <p>MapleSearch</p>
-      </div>
-      <div className={style.inputCon}>
-        <TextInput
-          className={style.inPut}
-          placeholder="닉네임을 입력하세요."
-          onChange={(e: any) => setNickName(e.target.value)}
-        />
-        <Button text="조회" className={style.button} onClick={reFetchData} />
+      <div className={style.container}>
+        <h2 className={style.logoText}>MapleSearch</h2>
+        <div className={style.inputCon}>
+          <TextInput
+            className={style.inPut}
+            placeholder="닉네임을 입력하세요."
+            onChange={(e: any) => setNickName(e.target.value)}
+          />
+          <Button text="조회" className={style.button} onClick={reFetchData} />
+        </div>
+        <div className={style.searchRanking}>
+          <h3>Search Ranking</h3>
+          <div className={style.rankersDisplay}></div>
+        </div>
       </div>
     </>
   );
