@@ -3,6 +3,11 @@ import { css } from "@emotion/react";
 interface InfoProps {
   Color?: any;
 }
+export const flex = css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 export const ChInfo = ({ Color }: InfoProps) => css`
   border-radius: 20px;
   color: #fff;
@@ -14,6 +19,7 @@ export const ChInfo = ({ Color }: InfoProps) => css`
   font-weight: normal;
   span {
     margin-left: 7px;
+    margin-right: 7px;
     font-size: 12px;
   }
 `;
