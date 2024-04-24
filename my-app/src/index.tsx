@@ -8,10 +8,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "react-redux";
 import { Global } from "@emotion/react";
 import { useLayoutEffect, useState } from "react";
-import { MainPage } from "./components/infoPage/MainPage";
+import { MainPage } from "./components/Page/MainPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Content } from "./components/container/Content";
 import { GlobalStyle } from "./styles/globalStyles";
+import { Main } from "./components/container/Main";
 
 const storeModule = () => import("./states/client/store");
 const root = ReactDOM.createRoot(document.getElementById("root")!);
@@ -32,8 +33,10 @@ const HostRouter = () => {
           <BrowserRouter>
             <Global styles={GlobalStyle} />
             <Routes>
-              <Route path="/" element={<MainPage />} />
-              <Route path="/info" element={<Content />} />
+              <Route path="/" element={<MainPage />}>
+                <Route path="/" element={<Main />} />
+                <Route path="/info" element={<Content />} />
+              </Route>
             </Routes>
           </BrowserRouter>
         </Provider>
