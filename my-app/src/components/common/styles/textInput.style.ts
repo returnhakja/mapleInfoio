@@ -1,5 +1,4 @@
 import { css } from "@emotion/react";
-
 export const TextInputCon = css`
   position: relative;
   padding-left: 20px;
@@ -9,6 +8,5 @@ export const TextInputCon = css`
   border-radius: 12px 0 0 12px;
   border: 1px solid #3860c7;
   background: #fff;
-  font-size: 1em;
   font-weight: bold;
 `;

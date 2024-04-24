@@ -12,7 +12,6 @@ import { Header } from "../common/Header";
 
 export const Content = () => {
   const ocId = useSelector((state: RootState) => state.ocId);
-
   const app = useInfo({ nickName: ocId });
 
   const characterImage = ocId ? app.userInfo?.character_image : basicCharacter;

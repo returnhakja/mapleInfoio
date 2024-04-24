@@ -1,5 +1,4 @@
 import { css } from "@emotion/react";
-
 interface InfoProps {
   Color?: any;
 }
