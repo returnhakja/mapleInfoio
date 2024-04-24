@@ -8,7 +8,7 @@ import { setOcid } from "../../states/client/userOcid.ts/ocid";
 import { TextInput } from "./TextInput";
 import { Button } from "./Button";
 import Logo from "../../assets/logo.png";
-import * as style from "./styles/header.style";
+import * as style from "./styles/Header.style";
 
 export const Header = () => {
   const [nickName, setNickName] = useState("");

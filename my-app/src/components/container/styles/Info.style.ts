@@ -7,6 +7,51 @@ export const flex = css`
   justify-content: space-between;
   align-items: center;
 `;
+
+export const Content = css`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 20px 50px;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0px 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  h2 {
+    font-size: 21px;
+    text-align: center;
+    font-weight: 800;
+    padding: 10px 0;
+  }
+`;
+
+export const Info = css`
+  border-radius: 7px;
+  width: 500px;
+  background-color: #333;
+`;
+
+export const HeaderText = css`
+  color: yellow;
+  margin-top: 5px;
+  margin-left: 10px;
+  font-weight: bold;
+`;
+
+export const UserConfig = css`
+  background-color: #fff;
+  margin: 10px 10px 3px 10px;
+  height: 170px;
+  border-radius: 5px;
+
+  .userConfigCon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+`;
+
 export const ChInfo = ({ Color }: InfoProps) => css`
   border-radius: 20px;
   color: #fff;
@@ -40,16 +85,6 @@ export const ChLev = css`
   &::before {
     content: "LV. ";
   }
-`;
-
-export const Detail = css`
-  margin-left: 8px;
-  margin-bottom: 10px;
-  width: 97%;
-  border-radius: 10px 10px 10px 10px;
-  background-color: #313941;
-  color: #fff;
-  font-size: 8px;
 `;
 
 export const DetailContainer = css`

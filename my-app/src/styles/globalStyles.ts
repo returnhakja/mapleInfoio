@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 export const GlobalStyle = css`
   * {
     margin: 0;
-    padding: 0;
+    padding-top: 0;
     /* border: none;
     outline: none;
     box-sizing: border-box;
