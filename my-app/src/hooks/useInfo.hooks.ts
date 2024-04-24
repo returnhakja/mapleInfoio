@@ -54,6 +54,7 @@ export const useInfo = ({ nickName }: testPoprs) => {
   console.log(userInfo);
   console.log(userStat);
   console.log(userUnion);
+
   useEffect(() => {
     if (ocidData) {
       configRefetch();
@@ -62,8 +63,19 @@ export const useInfo = ({ nickName }: testPoprs) => {
       popularityRefetch();
       DojangRefetch();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ocidData]);
 
+  const filteredStats = userStat?.filter((stat: any) =>
+    ["HP", "MP", "STR", "DEX", "INT", "LUK"].includes(stat.stat_name)
+  );
+
+  const sortedStats = ["HP", "MP", "STR", "DEX", "INT", "LUK"].map(
+    (stat_name) =>
+      filteredStats?.find((stat: any) => stat.stat_name === stat_name)
+  );
+
+  console.log(sortedStats);
   return {
     isLoading,
     ocidData,
@@ -74,5 +86,6 @@ export const useInfo = ({ nickName }: testPoprs) => {
     userUnion,
     userPopularity,
     userDojang,
+    sortedStats,
   };
 };

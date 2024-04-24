@@ -46,6 +46,9 @@ const Colors = {
   black: "#333",
   transparent: "transparent",
   input: "#f3f7f9",
+  chInfo: "#9aa2ab",
+  subInfo: "#c9ced0",
+  name: "#3dbfd0",
 } as const;
 
 const Borders = {

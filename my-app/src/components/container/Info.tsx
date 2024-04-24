@@ -5,9 +5,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../states/client";
 import basicCharacter from "../../assets/basicCharacter.png";
 import * as Style from "./styles/Info.style";
+import * as StatStyle from "./styles/Stat.style";
 import * as ButtonStyle from "../common/styles/Button.style";
 import { Button } from "../common/Button";
 import { numberAttack } from "../../util/numberAttack";
+import { Theme } from "../../styles/theme/index";
+import { StatPageView } from "../page/StatPageView";
 
 export const ContentInfo = () => {
   const ocId = useSelector((state: RootState) => state.ocId);
@@ -29,26 +32,41 @@ export const ContentInfo = () => {
             <div className="userConfigCon">
               <div style={{ display: "grid", alignContent: "start" }}>
                 <div
-                  css={Style.ChInfo({ Color: "#9aa2ab" })}
+                  css={Style.ChInfo({ Color: Theme.colors.chInfo })}
                   style={{ textAlign: "center", fontSize: "14px" }}
                 >
                   {app.userInfo?.character_class}
                 </div>
                 <div>&nbsp;</div>
                 <div>&nbsp;</div>
-                <div css={[Style.ChInfo({ Color: "#c9ced0" }), Style.flex]}>
+                <div
+                  css={[
+                    Style.ChInfo({ Color: Theme.colors.subInfo }),
+                    Style.flex,
+                  ]}
+                >
                   <span>유니온</span>
                   <span style={{ textAlign: "right" }}>
                     {app.userUnion?.union_level}
                   </span>
                 </div>
-                <div css={[Style.ChInfo({ Color: "#c9ced0" }), Style.flex]}>
+                <div
+                  css={[
+                    Style.ChInfo({ Color: Theme.colors.subInfo }),
+                    Style.flex,
+                  ]}
+                >
                   <span>무릉도장</span>
                   <span style={{ textAlign: "right" }} className="dojang">
                     {app.userDojang?.dojang_best_floor}
                   </span>
                 </div>
-                <div css={[Style.ChInfo({ Color: "#c9ced0" }), Style.flex]}>
+                <div
+                  css={[
+                    Style.ChInfo({ Color: Theme.colors.subInfo }),
+                    Style.flex,
+                  ]}
+                >
                   <span>인기도</span>
                   <span style={{ textAlign: "right" }}>
                     {app.userPopularity?.popularity}
@@ -70,7 +88,7 @@ export const ContentInfo = () => {
                   }
                 />
                 <p
-                  css={Style.ChInfo({ Color: "#3dbfd0" })}
+                  css={Style.ChInfo({ Color: Theme.colors.name })}
                   style={{ textAlign: "center" }}
                 >
                   {app.userInfo?.character_name}
@@ -96,26 +114,26 @@ export const ContentInfo = () => {
           <Button text="Detail" css={ButtonStyle.DetailButton} />
         </div>
         <div css={Style.DetailContainer}>
-          <div css={Style.Stat}>STAT</div>
+          <div style={{ borderBottom: "1px solid gray" }}>
+            <div css={Style.Stat}>STAT</div>
+          </div>
           <div css={Style.Power}>
             <span css={Style.PowerLabel}>전투력</span>
             <span css={Style.PowerValue}>{numberAttack(attack)}</span>
             <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
           </div>
+          <div css={StatStyle.statContainer}>
+            {app.sortedStats?.map((item) => {
+              return (
+                <StatPageView
+                  statName={item?.stat_name}
+                  statValue={parseInt(item?.stat_value).toLocaleString()}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
-      {/* <div className={style.content}>
-        <div css={Style.ItemCon} className={style.Info}>
-          <p className={style.HeaderText}>CHARACTER INFO</p>
-          <div
-            style={{
-              backgroundColor: "gray",
-              height: "100px",
-              width: "100%",
-            }}
-          ></div>
-        </div>
-      </div> */}
     </div>
   );
 };

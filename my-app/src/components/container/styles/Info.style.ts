@@ -104,7 +104,7 @@ export const Stat = css`
 
 export const Power = css`
   background-color: #3e6076;
-  margin: 5px 10px 0 10px;
+  margin: 5px 10px 3px 10px;
   height: 40px;
   border-radius: 7px;
   display: flex;
