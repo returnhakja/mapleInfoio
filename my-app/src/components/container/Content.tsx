@@ -5,10 +5,10 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../states/client";
 import style from "./container.module.css";
 import basicCharacter from "../../assets/basicCharacter.png";
-import { Gnb } from "../header/Gnb";
 import * as Styles from "./Content.styles";
 import { Button } from "../common/Button";
 import { numberAttack } from "../../util/numberAttack";
+import { Header } from "../common/Header";
 
 export const Content = () => {
   const ocId = useSelector((state: RootState) => state.ocId);
@@ -23,9 +23,7 @@ export const Content = () => {
   if (app.InfoLoading) return <></>;
   return (
     <>
-      <header className={style.header}>
-        <Gnb />
-      </header>
+      <Header />
       <div className={style.content}>
         <h2>InfoMation</h2>
 

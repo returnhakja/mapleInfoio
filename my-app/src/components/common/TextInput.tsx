@@ -1,4 +1,7 @@
+/** @jsxImportSource @emotion/react */
+
 import { memo } from "react";
+import * as style from "./styles/textInput.style";
 
 export interface ITextInputProps {
   /**
@@ -144,6 +147,7 @@ export const TextInput = memo(
   }: ITextInputProps) => {
     return (
       <input
+        css={style.TextInputCon}
         id={id}
         type={type || "text"}
         ref={dom}

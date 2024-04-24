@@ -1,15 +1,15 @@
-import style from "./page.module.css";
+/** @jsxImportSource @emotion/react */
 
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useInfo } from "../../hooks/useInfo.hooks";
+import { useDispatch } from "react-redux";
+import { setOcid } from "../../states/client/userOcid.ts/ocid";
 import { TextInput } from "../common/TextInput";
 import { Button } from "../common/Button";
-import { useState } from "react";
-import { useInfo } from "../../hooks/useInfo.hooks";
-import { useNavigate } from "react-router-dom";
-import { setOcid } from "../../states/client/userOcid.ts/ocid";
-import { useDispatch } from "react-redux";
-import { Gnb } from "../header/Gnb";
+import * as style from "./styles/main.style";
 
-export const MainPage = () => {
+export const Main = () => {
   const [nickName, setNickName] = useState<string>("");
   const navigate = useNavigate();
   const app = useInfo({ nickName });
@@ -21,7 +21,6 @@ export const MainPage = () => {
     dispatch(setOcid(nickName));
     navigate("/info");
   };
-
   const rankers = [
     { order: 1, rankerNickName: "거프" },
     { order: 2, rankerNickName: "루피" },
@@ -37,25 +36,19 @@ export const MainPage = () => {
     { order: 12, rankerNickName: "조로" },
   ];
   return (
-    <>
-      <header className={style.header}>
-        <Gnb />
-      </header>
-      <div className={style.container}>
-        <h2 className={style.logoText}>MapleSearch</h2>
-        <div className={style.inputCon}>
-          <TextInput
-            className={style.inPut}
-            placeholder="닉네임을 입력하세요."
-            onChange={(e: any) => setNickName(e.target.value)}
-          />
-          <Button text="조회" className={style.button} onClick={reFetchData} />
-        </div>
-        <div className={style.searchRanking}>
-          <h3>Search Ranking</h3>
-          <div className={style.rankersDisplay}></div>
-        </div>
+    <div css={style.MainCon}>
+      <h2>MapleSearch</h2>
+      <div css={style.InputCon}>
+        <TextInput
+          placeholder="닉네임을 입력하세요."
+          onChange={(e: any) => setNickName(e.target.value)}
+        />
+        <Button text="조회" onClick={reFetchData} />
       </div>
-    </>
+      <div css={style.SearchRanking}>
+        <h3>Search Ranking</h3>
+        <div css={style.RankersDisplay}></div>
+      </div>
+    </div>
   );
 };
