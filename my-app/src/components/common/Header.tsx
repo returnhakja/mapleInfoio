@@ -19,7 +19,11 @@ export const Header = () => {
     app.refetch();
     dispatch(setOcid(nickName));
   };
-
+  const onKeyUp = (e: any) => {
+    if (e.key === "Enter") {
+      reFetchData();
+    }
+  };
   return (
     <header css={style.Header}>
       <div css={style.HeaderCon}>
@@ -27,7 +31,7 @@ export const Header = () => {
           <img src={Logo} alt="Logo" />
         </figure>
         {ocId ? (
-          <div css={style.inputCon}>
+          <div css={style.inputCon} onKeyUp={onKeyUp}>
             <TextInput
               placeholder="닉네임을 입력하세요."
               onChange={(e: any) => setNickName(e.target.value)}

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useInfo } from "../../hooks/useInfo.hooks";
 import { useDispatch } from "react-redux";
@@ -19,8 +19,11 @@ export const Main = () => {
   const reFetchData = () => {
     app.refetch();
     dispatch(setOcid(nickName));
-    navigate("/info");
+    if (!app.ocidData) {
+      navigate("/info");
+    }
   };
+
   const rankers = [
     { order: 1, rankerNickName: "거프" },
     { order: 2, rankerNickName: "루피" },
@@ -35,13 +38,23 @@ export const Main = () => {
     { order: 11, rankerNickName: "상디" },
     { order: 12, rankerNickName: "조로" },
   ];
+  const onKeyUp = (e: any) => {
+    if (e.key === "Enter") {
+      reFetchData();
+    }
+  };
+  const ref = useRef<HTMLInputElement>();
+  useEffect(() => {
+    ref?.current?.focus();
+  }, []);
   return (
     <div css={style.MainCon}>
       <h2>MapleSearch</h2>
-      <div css={style.InputCon}>
+      <div css={style.InputCon} onKeyUp={onKeyUp}>
         <TextInput
           placeholder="닉네임을 입력하세요."
           onChange={(e: any) => setNickName(e.target.value)}
+          dom={ref}
         />
         <Button text="조회" onClick={reFetchData} />
       </div>

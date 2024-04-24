@@ -15,6 +15,10 @@ export const useOcidAPI = () => {
       staleTime: 1000 * 60,
       queryFn: () => getUserOcid({ ...param }),
       refetchOnWindowFocus: false,
+      onError: () => {
+        alert("해당 닉네임이 없습니다");
+        window.location.href = "/";
+      },
       enabled: Boolean(!param),
     });
   };
