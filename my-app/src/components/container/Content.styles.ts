@@ -21,6 +21,11 @@ export const ChInfo = ({ Color }: InfoProps) => css`
     margin-right: 7px;
     font-size: 12px;
   }
+  & .dojang {
+    ::after {
+      content: " 층";
+    }
+  }
 `;
 
 export const ChLev = css`
@@ -82,4 +87,13 @@ export const PowerValue = css`
   font-size: 20px;
   color: #ffff33;
   white-space: nowrap;
+`;
+
+// 장비창
+export const ItemCon = css`
+  background-color: gray;
+`;
+
+export const divCon = css`
+  background-color: wheat;
 `;
