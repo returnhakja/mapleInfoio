@@ -8,9 +8,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "react-redux";
 import { Global } from "@emotion/react";
 import { useLayoutEffect, useState } from "react";
-import { MainPage } from "./components/Page/MainPage";
+import { Layout } from "./components/page/Layout";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Content } from "./components/container/Content";
+import { ContentInfo } from "./components/container/Info";
 import { GlobalStyle } from "./styles/globalStyles";
 import { Main } from "./components/container/Main";
 
@@ -33,9 +33,9 @@ const HostRouter = () => {
           <BrowserRouter>
             <Global styles={GlobalStyle} />
             <Routes>
-              <Route path="/" element={<MainPage />}>
+              <Route path="/" element={<Layout />}>
                 <Route path="/" element={<Main />} />
-                <Route path="/info" element={<Content />} />
+                <Route path="/info" element={<ContentInfo />} />
               </Route>
             </Routes>
           </BrowserRouter>

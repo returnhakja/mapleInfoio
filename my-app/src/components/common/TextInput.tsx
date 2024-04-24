@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { memo } from "react";
-import * as style from "./styles/textInput.style";
+import * as style from "./styles/TextInput.style";
 
 export interface ITextInputProps {
   /**

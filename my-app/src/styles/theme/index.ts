@@ -52,11 +52,17 @@ const Borders = {
   default: `1px solid ${Colors.border}`,
 } as const;
 
+const BoxShadow = {
+  default: `0px 4px 6px -1px rgba(0, 0, 0, 0.1),
+  0px 2px 4px -1px rgba(0, 0, 0, 0.06);`,
+} as const;
+
 const Media = (size: any) => `@media (min-width: ${size})`;
 
 export const Theme = {
   colors: Colors,
   border: Borders,
+  BoxShadow: BoxShadow,
   size: Sizes,
   mediaSizes: MediaSizes,
   media: Media,

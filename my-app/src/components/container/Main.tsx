@@ -7,7 +7,8 @@ import { useDispatch } from "react-redux";
 import { setOcid } from "../../states/client/userOcid.ts/ocid";
 import { TextInput } from "../common/TextInput";
 import { Button } from "../common/Button";
-import * as style from "./styles/main.style";
+import * as style from "./styles/Main.style";
+import * as ButtonStyle from "../common/styles/Button.style";
 
 export const Main = () => {
   const [nickName, setNickName] = useState<string>("");
@@ -56,7 +57,11 @@ export const Main = () => {
           onChange={(e: any) => setNickName(e.target.value)}
           dom={ref}
         />
-        <Button text="조회" onClick={reFetchData} />
+        <Button
+          css={ButtonStyle.SearchButton}
+          text="조회"
+          onClick={reFetchData}
+        />
       </div>
       <div css={style.SearchRanking}>
         <h3>Search Ranking</h3>

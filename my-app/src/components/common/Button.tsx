@@ -3,7 +3,6 @@
 import { forwardRef } from "react";
 import { Theme } from "../../styles/theme/index";
 import type { AllHTMLAttributes } from "react";
-import * as styles from "./styles/button.style";
 
 export interface ButtonProps extends AllHTMLAttributes<HTMLButtonElement> {
   icon?: string;
@@ -28,7 +27,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     };
     return (
       <button
-        css={styles.ButtonCon}
         id={id}
         type="button"
         className={`button ${className}`}

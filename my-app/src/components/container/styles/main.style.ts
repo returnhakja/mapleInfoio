@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
 
 export const MainCon = css`
-  margin: 110px auto 0 auto;
   padding: 30px 0;
   display: flex;
   flex-direction: column;
