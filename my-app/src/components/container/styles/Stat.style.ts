@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
-export const statContainer = css`
-  background-color: #a6afb9;
+export const statContainer = ({ color }: any) => css`
+  background-color: ${color};
   margin: 5px 20px 3px 10px;
   border-radius: 7px;
   padding: 10px;
