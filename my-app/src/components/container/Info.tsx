@@ -122,12 +122,24 @@ export const ContentInfo = () => {
             <span css={Style.PowerValue}>{numberAttack(attack)}</span>
             <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
           </div>
-          <div css={StatStyle.statContainer}>
+          <div css={StatStyle.statContainer({ color: "#a6afb9" })}>
             {app.sortedStats?.map((item) => {
               return (
                 <StatPageView
+                  key={item?.stat_name}
                   statName={item?.stat_name}
                   statValue={parseInt(item?.stat_value).toLocaleString()}
+                />
+              );
+            })}
+          </div>
+          <div css={StatStyle.statContainer({ color: "#6c7884" })}>
+            {app.secondStats?.map((item) => {
+              return (
+                <StatPageView
+                  key={item?.stat_name}
+                  statName={item?.stat_name}
+                  statValue={item?.stat_value}
                 />
               );
             })}
