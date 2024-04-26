@@ -1,8 +1,8 @@
 import { css } from "@emotion/react";
 
-export const statContainer = ({ color }: any) => css`
+export const statContainer = ({ color, marginRight }: any) => css`
   background-color: ${color};
-  margin: 5px 20px 3px 10px;
+  margin: 5px ${marginRight}px 3px 10px;
   border-radius: 7px;
   padding: 10px;
   display: flex;

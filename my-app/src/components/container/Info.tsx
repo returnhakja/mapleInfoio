@@ -7,11 +7,11 @@ import basicCharacter from "../../assets/basicCharacter.png";
 import * as Style from "./styles/Info.style";
 import * as StatStyle from "./styles/Stat.style";
 import * as ButtonStyle from "../common/styles/Button.style";
+import * as EquipStyle from "./styles/EquipMents.style";
 import { Button } from "../common/Button";
 import { numberAttack } from "../../util/numberAttack";
 import { Theme } from "../../styles/theme/index";
 import { StatPageView } from "../page/StatPageView";
-
 export const ContentInfo = () => {
   const ocId = useSelector((state: RootState) => state.ocId);
   const app = useInfo({ nickName: ocId });
@@ -122,7 +122,12 @@ export const ContentInfo = () => {
             <span css={Style.PowerValue}>{numberAttack(attack)}</span>
             <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
           </div>
-          <div css={StatStyle.statContainer({ color: "#a6afb9" })}>
+          <div
+            css={StatStyle.statContainer({
+              color: "#a6afb9",
+              marginRight: "20",
+            })}
+          >
             {app.sortedStats?.map((item) => {
               return (
                 <StatPageView
@@ -133,7 +138,12 @@ export const ContentInfo = () => {
               );
             })}
           </div>
-          <div css={StatStyle.statContainer({ color: "#6c7884" })}>
+          <div
+            css={StatStyle.statContainer({
+              color: "#6c7884",
+              marginRight: "10",
+            })}
+          >
             {app.secondStats?.map((item) => {
               return (
                 <StatPageView
@@ -143,6 +153,47 @@ export const ContentInfo = () => {
                 />
               );
             })}
+          </div>
+          <div
+            css={StatStyle.statContainer({
+              color: "#6c7884",
+              marginRight: "10",
+            })}
+          >
+            {app.ThirdStats?.map((item) => {
+              return (
+                <>
+                  <StatPageView
+                    key={item?.stat_name}
+                    statName={item?.stat_name}
+                    statValue={item?.stat_value}
+                  />
+                </>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+      <div css={Style.Content}>
+        <div css={EquipStyle.BtnDiv}>
+          <Button text="Equipments" css={EquipStyle.Btn} />
+          <Button text="Skills" css={EquipStyle.Btn} />
+        </div>
+        <div css={Style.Info} style={{ width: "300px" }}>
+          <p css={Style.HeaderText} style={{ textAlign: "center" }}>
+            EQUIPMENT INVENTORY
+          </p>
+          <div css={Style.UserConfig}>
+            <div css={EquipStyle.EquCon}>
+              <div css={EquipStyle.EquContainer}>1</div>
+              <div> &nbsp; </div>
+              <div css={EquipStyle.EquContainer}>3</div>
+              <div> &nbsp; </div>
+              <div css={EquipStyle.EquContainer}>1</div>
+              <div css={EquipStyle.EquContainer}>2</div>
+              <div css={EquipStyle.EquContainer}>3</div>
+              <div css={EquipStyle.EquContainer}>3</div>
+            </div>
           </div>
         </div>
       </div>

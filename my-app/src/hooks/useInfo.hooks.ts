@@ -68,55 +68,67 @@ export const useInfo = ({ nickName }: testPoprs) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ocidData]);
 
-  const filteredStats = userStat?.filter((stat: any) =>
-    ["HP", "MP", "STR", "DEX", "INT", "LUK"].includes(stat.stat_name)
-  );
-
-  const sortedStats = ["HP", "MP", "STR", "DEX", "INT", "LUK"].map(
-    (stat_name) =>
-      filteredStats?.find((stat: any) => stat.stat_name === stat_name)
-  );
+  const sortedStats = ["HP", "MP", "STR", "DEX", "INT", "LUK"]
+    .map((stat_name) =>
+      userStat?.find((stat: any) => stat.stat_name === stat_name)
+    )
+    .filter((stat) => stat !== undefined);
 
   const formattedStats = userStat?.map((stat: any) => {
-    let formattedValue: string | number = stat.stat_value;
-    let formattedName: string | number = stat.stat_name;
+    const { stat_name, stat_value } = stat;
 
-    switch (stat.stat_name) {
-      case "최대 스탯공격력":
-        formattedValue = `${numberAttack(parseInt(stat.stat_value))}`;
-        // formattedName = "스텟 공격력";
-        break;
-      case "공격력":
-        formattedValue = `${parseInt(stat.stat_value).toLocaleString()}`;
-        break;
-      case "데미지":
-      case "보스 몬스터 데미지":
-      case "최종 데미지":
-      case "방어율 무시":
-      case "일반 몬스터 데미지":
-      case "상태이상 추가 데미지":
-        formattedValue = `${stat.stat_value}%`;
-        break;
-      case "크리티컬 확률":
-      case "크리티컬 데미지":
-      case "재사용 대기시간 감소(%)":
-      case "재사용 대기시간 미적용":
-      case "속성 내성 무시":
-      case "소환수 지속시간 증가":
-      case "버프 지속시간":
-        formattedValue = `${stat.stat_value}%`;
-        break;
-      case "재사용 대기시간 감소 (초)":
-        formattedValue = `${stat.stat_value}초`;
-        break;
-      default:
-        break;
-    }
+    const formatStatName = (name: string) => {
+      switch (name) {
+        case USER_STAT.MAX_ATTACK:
+          return USER_STAT.STAT_ATTACK;
+        default:
+          return name;
+      }
+    };
+
+    const formatStatValue = (name: string, value: string) => {
+      switch (name) {
+        case USER_STAT.MAX_ATTACK:
+          return `${numberAttack(parseInt(value))}`;
+        case USER_STAT.ATTACK:
+          return `${parseInt(value).toLocaleString()}`;
+        case USER_STAT.DAMAGE:
+        case USER_STAT.BOSS_ATTACK:
+        case USER_STAT.FINAL_DAMAGE:
+        case USER_STAT.BANG_MU:
+        case USER_STAT.NORMAL_DAMAGE:
+        case USER_STAT.ADDITIONAL_DAMAGE:
+        case USER_STAT.CRITICAL_CHANCE:
+        case USER_STAT.CRITICAL_DAMAGE:
+        case USER_STAT.COLLDOWN_PERCENT:
+        case USER_STAT.NOT_COLLDOWN:
+        case USER_STAT.IGNORE_RESISTANCE:
+        case USER_STAT.INCREASED_DURATION:
+        case USER_STAT.BUFF_DURATION:
+        case USER_STAT.MESO_DROP:
+        case USER_STAT.ITEM_DROP:
+        case USER_STAT.STANS:
+        case USER_STAT.EXP:
+        case USER_STAT.SPEED:
+        case USER_STAT.JUMPING_POWER:
+          return `${value}%`;
+        case USER_STAT.COLLDOWN:
+          return `${value}초`;
+        case USER_STAT.ATTACK_SPEED:
+          return `${value}단계`;
+        default:
+          return value;
+      }
+    };
+
+    const formattedName = formatStatName(stat_name);
+    const formattedValue = formatStatValue(stat_name, stat_value);
 
     return { ...stat, stat_name: formattedName, stat_value: formattedValue };
   });
+
   const secondStats = [
-    USER_STAT.MAX_ATTACK,
+    USER_STAT.STAT_ATTACK,
     USER_STAT.DAMAGE,
     USER_STAT.FINAL_DAMAGE,
     USER_STAT.BOSS_ATTACK,
@@ -136,7 +148,16 @@ export const useInfo = ({ nickName }: testPoprs) => {
     formattedStats?.find((stat: any) => stat.stat_name === stat_name)
   );
   console.log(formattedStats);
-
+  const ThirdStats = [
+    USER_STAT.MESO_DROP,
+    USER_STAT.STAR_FORCE,
+    USER_STAT.ITEM_DROP,
+    USER_STAT.ARCANDE_FORCE,
+    USER_STAT.EXP,
+    USER_STAT.AUTHENTIC_FORCE,
+  ].map((stat_name) =>
+    formattedStats?.find((stat: any) => stat.stat_name === stat_name)
+  );
   console.log(sortedStats);
   console.log(secondStats);
   return {
@@ -151,5 +172,6 @@ export const useInfo = ({ nickName }: testPoprs) => {
     userDojang,
     sortedStats,
     secondStats,
+    ThirdStats,
   };
 };
