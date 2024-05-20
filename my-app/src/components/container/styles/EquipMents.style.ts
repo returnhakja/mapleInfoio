@@ -17,7 +17,7 @@ export const EquCon = css`
 
 export const BtnDiv = css`
   display: flex;
-  gap: 5px;
+  gap: 10px;
   margin-bottom: 20px;
 `;
 export const Btn = css`
@@ -25,9 +25,13 @@ export const Btn = css`
   justify-content: center;
   align-items: center;
   gap: 10px;
+  color: #fff;
+  font-size: 22px !important;
+  font-weight: 600;
   border-radius: 12px;
   background: #74eaf1;
   border: 0px;
   box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16),
     0px 3px 6px 0px rgba(0, 0, 0, 0.23);
+  cursor: pointer;
 `;

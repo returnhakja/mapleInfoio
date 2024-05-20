@@ -23,7 +23,7 @@ export const ContentInfo = () => {
   console.log(attack);
   if (app.InfoLoading) return <></>;
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", gap: "20px" }}>
       <div css={Style.Content}>
         <h2>InfoMation</h2>
         <div css={Style.Info}>
