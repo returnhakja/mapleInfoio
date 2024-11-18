@@ -21,6 +21,57 @@ export const ContentInfo = () => {
     (item: any) => item.stat_name === "전투력"
   ).stat_value;
   console.log(attack);
+  // console.log(app.ring4Icon);
+  console.log(app.userItemIcons["귀고리"]);
+
+  const itemIcons = [
+    "반지4",
+    "모자",
+    "엠블렘",
+    "반지3",
+    "펜던트2",
+    "얼굴장식",
+    "뱃지",
+    "반지2",
+    "펜던트",
+    "눈장식",
+    "귀고리",
+    "훈장",
+    "반지1",
+    "무기",
+    "상의",
+    "어깨장식",
+    "보조무기",
+    "포켓 아이템",
+    "벨트",
+    "하의",
+    "장갑",
+    "망토",
+    "",
+    "신발",
+    "기계 심장",
+  ];
+
+  const renderItemIcons = () => {
+    return itemIcons.map((icon, index) => (
+      <>
+        {!icon && <div style={{ margin: "15px" }} />}
+        {icon && (
+          <img
+            src={app.userItemIcons[icon]}
+            css={EquipStyle.EquContainer}
+            alt={icon}
+          />
+        )}
+        {(index === 0 ||
+          index === 1 ||
+          index === 5 ||
+          index === 21 ||
+          index === 23) && <div style={{ margin: "15px" }} />}
+      </>
+    ));
+  };
+
   if (app.InfoLoading) return <></>;
   return (
     <div style={{ display: "flex" }}>
@@ -179,21 +230,26 @@ export const ContentInfo = () => {
           <Button text="Equipments" css={EquipStyle.Btn} />
           <Button text="Skills" css={EquipStyle.Btn} />
         </div>
-        <div css={Style.Info} style={{ width: "300px" }}>
+        <div css={Style.Info} style={{ width: "300px", height: "45%" }}>
           <p css={Style.HeaderText} style={{ textAlign: "center" }}>
             EQUIPMENT INVENTORY
           </p>
-          <div css={Style.UserConfig}>
-            <div css={EquipStyle.EquCon}>
-              <div css={EquipStyle.EquContainer}>1</div>
-              <div> &nbsp; </div>
-              <div css={EquipStyle.EquContainer}>3</div>
-              <div> &nbsp; </div>
-              <div css={EquipStyle.EquContainer}>1</div>
-              <div css={EquipStyle.EquContainer}>2</div>
-              <div css={EquipStyle.EquContainer}>3</div>
-              <div css={EquipStyle.EquContainer}>3</div>
+          <div css={Style.UserConfig} style={{ height: "85%" }}>
+            <div css={Style.UserConfig}>
+              <div css={EquipStyle.EquCon}>{renderItemIcons()}</div>
             </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              gap: "5px",
+              marginRight: "5%",
+              height: "4%",
+            }}
+          >
+            <button>어센틱 심볼</button>
+            <button>아케인 심볼</button>
           </div>
         </div>
       </div>

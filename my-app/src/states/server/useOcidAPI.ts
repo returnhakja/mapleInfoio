@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import {
   getUserConfig,
   getUserDojang,
+  getUserItem,
   getUserOcid,
   getUserPopularity,
   getUserStat,
@@ -80,6 +81,18 @@ export const useOcidAPI = () => {
       enabled: Boolean(!param),
     });
   };
+  const useGetUserItem = (param: Parameters<typeof getUserItem>[0]) => {
+    console.log(param);
+    return useQuery({
+      queryKey: ["userItem", param.ocid],
+      staleTime: 0,
+      queryFn: () => getUserItem({ ...param.ocid }),
+      onError: () => {
+        console.log("error");
+      },
+      enabled: Boolean(!param),
+    });
+  };
   return {
     useGetUserOcid,
     useGetUserConfig,
@@ -87,5 +100,6 @@ export const useOcidAPI = () => {
     useGetUserUnion,
     useGetUserPopularity,
     useGetUserDojang,
+    useGetUserItem,
   };
 };

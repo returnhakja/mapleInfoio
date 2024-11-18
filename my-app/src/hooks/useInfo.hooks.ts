@@ -14,6 +14,7 @@ export const useInfo = ({ nickName }: testPoprs) => {
     useGetUserUnion,
     useGetUserPopularity,
     useGetUserDojang,
+    useGetUserItem,
   } = useOcidAPI();
   const { isLoading, data: ocidData, refetch } = useGetUserOcid({ nickName });
 
@@ -24,6 +25,7 @@ export const useInfo = ({ nickName }: testPoprs) => {
   } = useGetUserConfig({
     ocid: ocidData,
   });
+
   const {
     isLoading: StatLoading,
     data: userStat,
@@ -52,6 +54,10 @@ export const useInfo = ({ nickName }: testPoprs) => {
   } = useGetUserDojang({
     ocid: ocidData,
   });
+  const { data: userItem, refetch: ItemRefetch } = useGetUserItem({
+    ocid: ocidData,
+  });
+  console.log(userItem);
   console.log(ocidData);
   console.log(userInfo);
   console.log(userStat);
@@ -64,6 +70,7 @@ export const useInfo = ({ nickName }: testPoprs) => {
       UnionRefetch();
       popularityRefetch();
       DojangRefetch();
+      ItemRefetch();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ocidData]);
@@ -160,6 +167,50 @@ export const useInfo = ({ nickName }: testPoprs) => {
   );
   console.log(sortedStats);
   console.log(secondStats);
+
+  const itemSlots = [
+    "모자",
+    "엠블렘",
+    "얼굴장식",
+    "눈장식",
+    "귀고리",
+    "상의",
+    "하의",
+    "신발",
+    "장갑",
+    "망토",
+    "보조무기",
+    "무기",
+    "반지1",
+    "반지2",
+    "반지3",
+    "반지4",
+    "펜던트",
+    "훈장",
+    "벨트",
+    "어깨장식",
+    "포켓 아이템",
+    "기계 심장",
+    "뱃지",
+    "펜던트2",
+  ];
+
+  const getItemIcon = (slotName: any, items: any) => {
+    const item = items.find(
+      (item: any) => item.item_equipment_slot === slotName
+    );
+    return item?.item_icon;
+  };
+
+  const userItemIcons = itemSlots.reduce((icons: any, slotName) => {
+    const key = `${slotName}`;
+    icons[key] = getItemIcon(slotName, userItem?.item_equipment || []);
+    return icons;
+  }, []);
+
+  console.log(userItemIcons);
+  console.log(itemSlots);
+  // console.log(ring4);
   return {
     isLoading,
     ocidData,
@@ -173,5 +224,7 @@ export const useInfo = ({ nickName }: testPoprs) => {
     sortedStats,
     secondStats,
     ThirdStats,
+    userItem,
+    userItemIcons,
   };
 };

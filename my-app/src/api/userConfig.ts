@@ -38,3 +38,9 @@ export const getUserDojang = async (param: User.Config) => {
   const data = await GET(`/character/dojang?ocid=${param.ocid}`, param);
   return data;
 };
+export const getUserItem = async (param: User.Config) => {
+  console.log(param);
+  const data = await GET(`/character/item-equipment?ocid=${param.ocid}`, param);
+  console.log(data);
+  return data;
+};

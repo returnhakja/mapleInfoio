@@ -8,11 +8,12 @@ export const EquContainer = css`
 
 export const EquCon = css`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, 2fr);
   gap: 10px;
+  padding-top: 20px;
   /* justify-content: space-between; */
-  margin-left: 7px;
-  padding-top: 10px;
+  /* margin-left: 7px; */
+  /* padding-top: 10px; */
 `;
 
 export const BtnDiv = css`
