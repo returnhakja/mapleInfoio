@@ -19,7 +19,8 @@
   },
   "jsxImportSource": "@emotion/react",
   "paths": {
-    "@/*": ["./src/*"]
+    "@components/*": ["components/*"],
+    "@/*": ["*"]
   },
   "include": ["src"],
   "exclude": ["node_modules"],

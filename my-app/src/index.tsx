@@ -10,9 +10,10 @@ import { Global } from "@emotion/react";
 import { useLayoutEffect, useState } from "react";
 import { Layout } from "./components/page/Layout";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ContentInfo } from "./components/container/Info";
+
 import { GlobalStyle } from "./styles/globalStyles";
 import { Main } from "./components/container/Main";
+import { ContentInfo } from "./components/container/Info";
 
 const storeModule = () => import("./states/client/store");
 const root = ReactDOM.createRoot(document.getElementById("root")!);
