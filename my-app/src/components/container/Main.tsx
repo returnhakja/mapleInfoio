@@ -3,8 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useInfo } from "../../hooks/useInfo.hooks";
-import { useDispatch } from "react-redux";
-import { setOcid } from "../../states/client/userOcid.ts/ocid";
 import { TextInput } from "../common/TextInput";
 import { Button } from "../common/Button";
 import * as style from "./styles/Main.style";
@@ -15,11 +13,8 @@ export const Main = () => {
   const navigate = useNavigate();
   const app = useInfo({ nickName });
 
-  const dispatch = useDispatch();
-
   const reFetchData = () => {
-    app.refetch();
-    dispatch(setOcid(nickName));
+    app.executeSearch(nickName);
     if (!app.ocidData) {
       navigate("/info");
     }

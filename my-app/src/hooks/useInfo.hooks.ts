@@ -1,13 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useOcidAPI } from "../states/server/useOcidAPI";
 import { numberAttack } from "../util/numberAttack";
 import { USER_STAT } from "../constants/stat";
 import { css } from "@emotion/react";
+import useInfoStore from "../stores/info";
 
-interface testPoprs {
+interface testProps {
   nickName?: string;
 }
-export const useInfo = ({ nickName }: testPoprs) => {
+export const useInfo = ({ nickName }: testProps) => {
   const {
     useGetUserOcid,
     useGetUserConfig,
@@ -17,7 +18,27 @@ export const useInfo = ({ nickName }: testPoprs) => {
     useGetUserDojang,
     useGetUserItem,
   } = useOcidAPI();
-  const { isLoading, data: ocidData, refetch } = useGetUserOcid({ nickName });
+
+  const {
+    fetchUnion,
+    union: userUnion,
+    refetchUnion,
+    fetchOcid,
+    ocId: ocidData,
+  } = useInfoStore((state) => state);
+
+  const [searchNickName, setSearchNickName] = useState<string>("");
+  // const {
+  //   isLoading,
+  //   data: ocidData,
+  //   refetch,
+  // } = useGetUserOcid({ nickName: searchNickName });
+  console.log(searchNickName);
+  const executeSearch = (name: string) => {
+    console.log(nickName);
+    setSearchNickName(name);
+    fetchOcid({ nickName: name });
+  };
 
   const {
     isLoading: InfoLoading,
@@ -27,6 +48,13 @@ export const useInfo = ({ nickName }: testPoprs) => {
     ocid: ocidData,
   });
 
+  console.log(userUnion);
+  console.log(ocidData);
+  useEffect(() => {
+    if (ocidData) {
+      fetchUnion({ ocid: ocidData.ocid });
+    }
+  }, [ocidData, searchNickName]);
   const {
     isLoading: StatLoading,
     data: userStat,
@@ -36,7 +64,7 @@ export const useInfo = ({ nickName }: testPoprs) => {
   });
   const {
     isLoading: UnionLoading,
-    data: userUnion,
+    // data: userUnion,
     refetch: UnionRefetch,
   } = useGetUserUnion({
     ocid: ocidData,
@@ -68,13 +96,14 @@ export const useInfo = ({ nickName }: testPoprs) => {
     if (ocidData) {
       configRefetch();
       StatRefetch();
-      UnionRefetch();
+      // UnionRefetch();
+      refetchUnion({ ocid: ocidData.ocid });
       popularityRefetch();
       DojangRefetch();
       ItemRefetch();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ocidData]);
+  }, [ocidData, searchNickName]);
 
   const sortedStats = ["HP", "MP", "STR", "DEX", "INT", "LUK"]
     .map((stat_name) =>
@@ -348,9 +377,9 @@ export const useInfo = ({ nickName }: testPoprs) => {
   };
 
   return {
-    isLoading,
+    isLoading: false,
     ocidData,
-    refetch,
+    // refetch,
     userInfo,
     InfoLoading,
     userStat,
@@ -366,5 +395,6 @@ export const useInfo = ({ nickName }: testPoprs) => {
     userItemName,
     userItemStat,
     getPotentialGradeStyle,
+    executeSearch,
   };
 };

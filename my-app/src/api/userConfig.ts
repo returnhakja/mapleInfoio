@@ -5,11 +5,6 @@ import { GET } from "../components/common/useMapleAPI";
 export const getUserOcid = async (param: User.Ocid) => {
   console.log(param);
   const data = await GET(`/id?character_name=${param.nickName}`, param);
-  if (data && data.ocid) {
-    // const configData = await getUserConfig({ ocid: data.ocid });
-    // return configData;
-  }
-
   return data;
 };
 
@@ -27,6 +22,7 @@ export const getUserStat = async (param: User.Config) => {
   return data.final_stat;
 };
 export const getUserUnion = async (param: User.Config) => {
+  console.log(param);
   const data = await GET(`/user/union?ocid=${param.ocid}`, param);
   return data;
 };

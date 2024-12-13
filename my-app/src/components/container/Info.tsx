@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
 import { useInfo } from "../../hooks/useInfo.hooks";
-import { useSelector } from "react-redux";
-import { RootState } from "../../states/client";
 import basicCharacter from "../../assets/basicCharacter.png";
 import * as Style from "./styles/Info.style";
 import * as StatStyle from "./styles/Stat.style";
@@ -15,11 +13,15 @@ import { StatPageView } from "../page/StatPageView";
 import { useState } from "react";
 import { Tooltip } from "../common/Tooltip";
 import { css } from "@emotion/react";
+import useInfoStore from "../../stores/info";
 export const ContentInfo = () => {
-  const ocId = useSelector((state: RootState) => state.ocId);
-  const app = useInfo({ nickName: ocId });
+  // const ocId = useSelector((state: RootState) => state.ocId);
+  const { ocId: ocidData } = useInfoStore((state) => state);
+  const app = useInfo({ nickName: ocidData });
 
-  const characterImage = ocId ? app.userInfo?.character_image : basicCharacter;
+  const characterImage = ocidData
+    ? app.userInfo?.character_image
+    : basicCharacter;
   const attack = app.userStat?.find(
     (item: any) => item.stat_name === "전투력"
   ).stat_value;
