@@ -8,6 +8,7 @@ import {
   getUserStat,
   getUserUnion,
 } from "../../api/userConfig";
+import useInfoStore from "../../stores/info";
 
 export const useOcidAPI = () => {
   const useGetUserOcid = (param: Parameters<typeof getUserOcid>[0]) => {
@@ -20,7 +21,7 @@ export const useOcidAPI = () => {
         alert("해당 닉네임이 없습니다");
         window.location.href = "/";
       },
-      enabled: Boolean(!param),
+      enabled: false,
     });
   };
 
@@ -47,14 +48,18 @@ export const useOcidAPI = () => {
     });
   };
   const useGetUserUnion = (param: Parameters<typeof getUserUnion>[0]) => {
+    const setUnion = useInfoStore((state) => state.setUnion);
     return useQuery({
       queryKey: ["userUnion", param.ocid],
       staleTime: 1000 * 60,
       queryFn: () => getUserUnion({ ...param.ocid }),
+      onSuccess: (data) => {
+        setUnion(data);
+      },
       onError: () => {
         console.log("error");
       },
-      enabled: Boolean(!param),
+      enabled: false,
     });
   };
   const useGetUserPopularity = (
