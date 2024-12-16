@@ -23,6 +23,9 @@ export const useInfo = ({ nickName }: testProps) => {
     fetchUnion,
     union: userUnion,
     refetchUnion,
+    fetchHexa,
+    hexa: userHexa,
+    refetchHexa,
     fetchOcid,
     ocId: ocidData,
   } = useInfoStore((state) => state);
@@ -47,12 +50,13 @@ export const useInfo = ({ nickName }: testProps) => {
   } = useGetUserConfig({
     ocid: ocidData,
   });
-
-  console.log(userUnion);
-  console.log(ocidData);
+  console.log(userHexa);
+  // console.log(userUnion);
+  // console.log(ocidData);
   useEffect(() => {
     if (ocidData) {
       fetchUnion({ ocid: ocidData.ocid });
+      fetchHexa({ ocid: ocidData.ocid });
     }
   }, [ocidData, searchNickName]);
   const {
@@ -98,6 +102,7 @@ export const useInfo = ({ nickName }: testProps) => {
       StatRefetch();
       // UnionRefetch();
       refetchUnion({ ocid: ocidData.ocid });
+      refetchHexa({ ocid: ocidData.ocid });
       popularityRefetch();
       DojangRefetch();
       ItemRefetch();
@@ -396,5 +401,6 @@ export const useInfo = ({ nickName }: testProps) => {
     userItemStat,
     getPotentialGradeStyle,
     executeSearch,
+    userHexa: userHexa?.character_hexa_core_equipment,
   };
 };

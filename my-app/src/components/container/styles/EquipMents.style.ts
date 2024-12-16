@@ -1,16 +1,14 @@
 import { css } from "@emotion/react";
-
-// export const EquContainer = css`
-//   background-color: red;
-//   width: 40px;
-//   height: 40px;
-// `;
+const breakpoints = {
+  mobile: "@media (max-width: 768px)",
+  tablet: "@media (min-width: 769px) and (max-width: 1024px)",
+};
 
 export const EquCon = css`
   display: grid;
   grid-template-columns: repeat(5, 2fr);
   gap: 10px;
-  padding-top: 20px;
+  padding-top: 10px;
 `;
 
 export const BtnDiv = css`
@@ -67,7 +65,8 @@ export const EquContainer = css`
 export const InventoryContainer = css`
   position: relative;
   width: 300px;
-  height: 390px;
+  height: 370px;
+  border-radius: 8px;
   background: #2b2b2b;
   border: 1px solid #666;
 `;

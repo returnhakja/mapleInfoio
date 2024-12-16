@@ -14,6 +14,7 @@ export const Main = () => {
   const app = useInfo({ nickName });
 
   const reFetchData = () => {
+    if (!nickName) return alert("닉네임을 입력해주세요.");
     app.executeSearch(nickName);
     if (!app.ocidData) {
       navigate("/info");
@@ -36,6 +37,7 @@ export const Main = () => {
   ];
   const onKeyUp = (e: any) => {
     if (e.key === "Enter") {
+      if (!nickName) return alert("닉네임을 입력해주세요.");
       reFetchData();
     }
   };

@@ -24,7 +24,7 @@ export const ContentInfo = () => {
     : basicCharacter;
   const attack = app.userStat?.find(
     (item: any) => item.stat_name === "전투력"
-  ).stat_value;
+  )?.stat_value;
   console.log(attack);
   // console.log(app.ring4Icon);
   console.log(app.userItemIcons["귀고리"]);
@@ -112,7 +112,7 @@ export const ContentInfo = () => {
       <div
         css={css`
           display: flex;
-          gap: 2px;
+          flex-direction: row; // 기본값
         `}
       >
         {[...Array(count)].map((_, index) => (
@@ -623,185 +623,306 @@ export const ContentInfo = () => {
 
   if (app.InfoLoading) return <>로딩중...</>;
   return (
-    <div style={{ display: "flex" }}>
-      <div css={Style.Content}>
-        <h2>InfoMation</h2>
-        <div css={Style.Info}>
-          <p css={Style.HeaderText}>CHARACTER INFO</p>
-          <div css={Style.UserConfig}>
-            <div className="userConfigCon">
-              <div style={{ display: "grid", alignContent: "start" }}>
-                <div
-                  css={Style.ChInfo({ Color: Theme.colors.chInfo })}
-                  style={{ textAlign: "center", fontSize: "14px" }}
-                >
-                  {app.userInfo?.character_class}
+    <>
+      <div style={{ display: "flex" }}>
+        <div
+          css={[
+            Style.Content,
+            css`
+              @media (max-width: 768px) {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+              }
+            `,
+          ]}
+        >
+          <h2>InfoMation</h2>
+          <div css={Style.Info}>
+            <p css={Style.HeaderText}>CHARACTER INFO</p>
+            <div css={Style.UserConfig}>
+              <div className="userConfigCon">
+                <div style={{ display: "grid", alignContent: "start" }}>
+                  <div
+                    css={Style.ChInfo({ Color: Theme.colors.chInfo })}
+                    style={{ textAlign: "center", fontSize: "14px" }}
+                  >
+                    {app.userInfo?.character_class}
+                  </div>
+                  <div>&nbsp;</div>
+                  <div>&nbsp;</div>
+                  <div
+                    css={[
+                      Style.ChInfo({ Color: Theme.colors.subInfo }),
+                      Style.flex,
+                    ]}
+                  >
+                    <span>유니온</span>
+                    <span style={{ textAlign: "right" }}>
+                      {app.userUnion?.union_level}
+                    </span>
+                  </div>
+                  <div
+                    css={[
+                      Style.ChInfo({ Color: Theme.colors.subInfo }),
+                      Style.flex,
+                    ]}
+                  >
+                    <span>무릉도장</span>
+                    <span style={{ textAlign: "right" }} className="dojang">
+                      {app.userDojang?.dojang_best_floor}
+                    </span>
+                  </div>
+                  <div
+                    css={[
+                      Style.ChInfo({ Color: Theme.colors.subInfo }),
+                      Style.flex,
+                    ]}
+                  >
+                    <span>인기도</span>
+                    <span style={{ textAlign: "right" }}>
+                      {app.userPopularity?.popularity}
+                    </span>
+                  </div>
                 </div>
-                <div>&nbsp;</div>
-                <div>&nbsp;</div>
                 <div
-                  css={[
-                    Style.ChInfo({ Color: Theme.colors.subInfo }),
-                    Style.flex,
-                  ]}
+                  style={{
+                    display: "grid",
+                    justifyItems: "center",
+                  }}
                 >
-                  <span>유니온</span>
-                  <span style={{ textAlign: "right" }}>
-                    {app.userUnion?.union_level}
-                  </span>
+                  <div css={Style.ChLev}>{app.userInfo?.character_level}</div>
+                  <img
+                    style={{ alignItems: "center", justifyContent: "center" }}
+                    src={characterImage}
+                    alt={
+                      app.userInfo ? app.userInfo.character_name : "기본캐릭터"
+                    }
+                  />
+                  <p
+                    css={Style.ChInfo({ Color: Theme.colors.name })}
+                    style={{ textAlign: "center" }}
+                  >
+                    {app.userInfo?.character_name}
+                  </p>
                 </div>
-                <div
-                  css={[
-                    Style.ChInfo({ Color: Theme.colors.subInfo }),
-                    Style.flex,
-                  ]}
-                >
-                  <span>무릉도장</span>
-                  <span style={{ textAlign: "right" }} className="dojang">
-                    {app.userDojang?.dojang_best_floor}
-                  </span>
-                </div>
-                <div
-                  css={[
-                    Style.ChInfo({ Color: Theme.colors.subInfo }),
-                    Style.flex,
-                  ]}
-                >
-                  <span>인기도</span>
-                  <span style={{ textAlign: "right" }}>
-                    {app.userPopularity?.popularity}
-                  </span>
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "grid",
-                  justifyItems: "center",
-                }}
-              >
-                <div css={Style.ChLev}>{app.userInfo?.character_level}</div>
-                <img
-                  style={{ alignItems: "center", justifyContent: "center" }}
-                  src={characterImage}
-                  alt={
-                    app.userInfo ? app.userInfo.character_name : "기본캐릭터"
-                  }
-                />
-                <p
-                  css={Style.ChInfo({ Color: Theme.colors.name })}
-                  style={{ textAlign: "center" }}
-                >
-                  {app.userInfo?.character_name}
-                </p>
-              </div>
 
-              <div style={{ display: "grid", alignContent: "start" }}>
-                <div>&nbsp;</div>
-                <div>&nbsp;</div>
-                <div>&nbsp;</div>
-                <div>&nbsp;</div>
-                <div>&nbsp;</div>
-                <div>&nbsp;</div>
-                <div css={[Style.ChInfo({ Color: "#c9ced0" }), Style.flex]}>
-                  <span>길드</span>
-                  <span style={{ textAlign: "right" }}>
-                    {app.userInfo?.character_guild_name}
-                  </span>
+                <div style={{ display: "grid", alignContent: "start" }}>
+                  <div>&nbsp;</div>
+                  <div>&nbsp;</div>
+                  <div>&nbsp;</div>
+                  <div>&nbsp;</div>
+                  <div>&nbsp;</div>
+                  <div>&nbsp;</div>
+                  <div css={[Style.ChInfo({ Color: "#c9ced0" }), Style.flex]}>
+                    <span>길드</span>
+                    <span style={{ textAlign: "right" }}>
+                      {app.userInfo?.character_guild_name}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
+            <Button text="Detail" css={ButtonStyle.DetailButton} />
           </div>
-          <Button text="Detail" css={ButtonStyle.DetailButton} />
-        </div>
-        <div css={Style.DetailContainer}>
-          <div style={{ borderBottom: "1px solid gray" }}>
-            <div css={Style.Stat}>STAT</div>
-          </div>
-          <div css={Style.Power}>
-            <span css={Style.PowerLabel}>전투력</span>
-            <span css={Style.PowerValue}>{numberAttack(attack)}</span>
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-          </div>
-          <div
-            css={StatStyle.statContainer({
-              color: "#a6afb9",
-              marginRight: "20",
-            })}
-          >
-            {app.sortedStats?.map((item) => {
-              return (
-                <StatPageView
-                  key={item?.stat_name}
-                  statName={item?.stat_name}
-                  statValue={parseInt(item?.stat_value).toLocaleString()}
-                />
-              );
-            })}
-          </div>
-          <div
-            css={StatStyle.statContainer({
-              color: "#6c7884",
-              marginRight: "10",
-            })}
-          >
-            {app.secondStats?.map((item) => {
-              return (
-                <StatPageView
-                  key={item?.stat_name}
-                  statName={item?.stat_name}
-                  statValue={item?.stat_value}
-                />
-              );
-            })}
-          </div>
-          <div
-            css={StatStyle.statContainer({
-              color: "#6c7884",
-              marginRight: "10",
-            })}
-          >
-            {app.ThirdStats?.map((item) => {
-              return (
-                <>
+          <div css={Style.DetailContainer}>
+            <div style={{ borderBottom: "1px solid gray" }}>
+              <div css={Style.Stat}>STAT</div>
+            </div>
+            <div css={Style.Power}>
+              <span css={Style.PowerLabel}>전투력</span>
+              <span css={Style.PowerValue}>{numberAttack(attack)}</span>
+              <span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </span>
+            </div>
+            <div
+              css={StatStyle.statContainer({
+                color: "#a6afb9",
+                marginRight: "20",
+              })}
+            >
+              {app.sortedStats?.map((item) => {
+                return (
+                  <StatPageView
+                    key={item?.stat_name}
+                    statName={item?.stat_name}
+                    statValue={parseInt(item?.stat_value).toLocaleString()}
+                  />
+                );
+              })}
+            </div>
+            <div
+              css={StatStyle.statContainer({
+                color: "#6c7884",
+                marginRight: "10",
+              })}
+            >
+              {app.secondStats?.map((item) => {
+                return (
                   <StatPageView
                     key={item?.stat_name}
                     statName={item?.stat_name}
                     statValue={item?.stat_value}
                   />
-                </>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-      <div css={Style.Content}>
-        <div css={EquipStyle.BtnDiv}>
-          <Button text="Equipments" css={EquipStyle.Btn} />
-          <Button text="Skills" css={EquipStyle.Btn} />
-        </div>
-        <div css={Style.Info} style={{ width: "340px", height: "60%" }}>
-          <p css={Style.HeaderText} style={{ textAlign: "center" }}>
-            EQUIPMENT INVENTORY
-          </p>
-          <div css={Style.UserConfig} style={{ height: "85%" }}>
-            <div css={Style.UserConfig}>
-              <div css={EquipStyle.EquCon}>{renderItemIcons()}</div>
+                );
+              })}
+            </div>
+            <div
+              css={StatStyle.statContainer({
+                color: "#6c7884",
+                marginRight: "10",
+              })}
+            >
+              {app.ThirdStats?.map((item) => {
+                return (
+                  <>
+                    <StatPageView
+                      key={item?.stat_name}
+                      statName={item?.stat_name}
+                      statValue={item?.stat_value}
+                    />
+                  </>
+                );
+              })}
             </div>
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              gap: "5px",
-              marginRight: "5%",
-              height: "4%",
-            }}
-          >
-            <button>어센틱 심볼</button>
-            <button>아케인 심볼</button>
+        </div>
+        <div css={Style.Content}>
+          <div css={EquipStyle.BtnDiv}>
+            <Button text="Equipments" css={EquipStyle.Btn} />
+            <Button text="Skills" css={EquipStyle.Btn} />
+          </div>
+          <div css={Style.Info} style={{ width: "340px", height: "60%" }}>
+            <p css={Style.HeaderText} style={{ textAlign: "center" }}>
+              EQUIPMENT INVENTORY
+            </p>
+            <div css={Style.UserConfig} style={{ height: "85%" }}>
+              <div css={Style.UserConfig}>
+                <div css={EquipStyle.EquCon}>{renderItemIcons()}</div>
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                gap: "5px",
+                marginRight: "5%",
+                height: "4%",
+              }}
+            >
+              <button>어센틱 심볼</button>
+              <button>아케인 심볼</button>
+            </div>
+          </div>
+          {/* 스킬 */}
+          <div css={skillBoxStyle}>
+            <div css={skillHeaderStyle}>헥사 스킬 정보</div>
+            <div css={skillContentWrapper}>
+              {app.userHexa?.map((hexa: any) => {
+                return (
+                  <div key={hexa.hexa_core_name} css={skillItemStyle}>
+                    <div css={skillIconStyle}>⚔️</div>
+                    <div css={skillInfoStyle}>
+                      <div css={skillNameStyle}>{hexa?.hexa_core_name}</div>
+                      <div css={skillLevelStyle}>
+                        Lv. {hexa?.hexa_core_level}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
+
+const skillBoxStyle = css`
+  width: 320px;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #2a2a2a;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #666;
+  }
+`;
+
+const skillContentWrapper = css`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const skillHeaderStyle = css`
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #3a3a3a;
+`;
+
+const skillItemStyle = css`
+  display: flex;
+  align-items: center;
+  background-color: #3a3a3a;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 10px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateX(5px);
+    background-color: #4a4a4a;
+  }
+`;
+
+const skillIconStyle = css`
+  width: 40px;
+  height: 40px;
+  background-color: #555;
+  border-radius: 6px;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+`;
+
+const skillInfoStyle = css`
+  flex: 1;
+`;
+
+const skillNameStyle = css`
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+`;
+
+const skillLevelStyle = css`
+  color: #00ff00;
+  font-size: 14px;
+  font-weight: 500;
+`;

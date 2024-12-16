@@ -7,7 +7,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Global } from "@emotion/react";
 import { Layout } from "./components/page/Layout";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 
 import { GlobalStyle } from "./styles/globalStyles";
 import { Main } from "./components/container/Main";
@@ -18,7 +18,7 @@ const queryClient = new QueryClient();
 const HostRouter = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <HashRouter>
         <Global styles={GlobalStyle} />
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -26,7 +26,7 @@ const HostRouter = () => {
             <Route path="/info" element={<ContentInfo />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
       <ReactQueryDevtools initialIsOpen={true} />
     </QueryClientProvider>
   );

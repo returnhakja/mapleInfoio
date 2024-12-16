@@ -14,6 +14,7 @@ export const Header = () => {
   const inputFlag = useLocation().pathname === "/info";
 
   const reFetchData = () => {
+    if (!nickName) return alert("닉네임을 입력해주세요.");
     app.executeSearch(nickName);
   };
   const onKeyUp = (e: any) => {
@@ -25,7 +26,13 @@ export const Header = () => {
   return (
     <header css={style.Header}>
       <div css={style.HeaderCon}>
-        <figure css={style.Logo} onClick={() => (window.location.href = "/")}>
+        <figure
+          css={style.Logo}
+          onClick={() =>
+            (window.location.href =
+              "https://returnhakja.github.io/mapleInfoTest/")
+          }
+        >
           <img src={Logo} alt="Logo" />
         </figure>
         {inputFlag ? (
